@@ -1,6 +1,80 @@
 <?php
 $html_hot_product = show_box_product($hot_product);
 
+$categories = getCategoriesWithHomeFlag();
+
+$html_home_product = '';
+
+foreach ($categories as $category) {
+
+    $category_id = $category['id'];
+    $category_name = $category['name'];
+
+    $products = getProductsByCategoryId($category_id);
+
+    $html_home_pd = '';
+
+    foreach ($products as $product) {
+
+        if (isset($product['sale']) && $product['sale'] > 0) {
+            $discountAmount = $product['sale'] * $product['price'] / 100;
+            $discountedPrice = $product['price'] - $discountAmount;
+
+            $box_price = '
+                <p class="box-price">
+                    ' . number_format($discountedPrice, 0, ',', '.') . 'đ
+                    <span>' . number_format($product['price'], 0, ',', '.') . 'đ</span>
+                </p>'
+            ;
+
+            $box_sale = '
+                <p class="box-sale">' . $product['sale'] . '%</p>
+                ';
+        } else {
+            $box_price = '
+                <p class="box-price">
+                    ' . number_format($product['price'], 0, ',', '.') . 'đ
+                </p>'
+            ;
+
+            $box_sale = '';
+        }
+
+        $html_home_pd .= '
+            <div class="box-product">
+                <div class="box-img">
+                    <img src="uploads/' . $product['image'] . '" width="100%">
+                </div>
+
+                <div class="box-info">
+                    <p class="box-category">' . $category_name . '</p>
+                    <p class="box-name">' . $product['name'] . '</p>
+                    ' . $box_price . '
+                </div>
+
+                ' . $box_sale . '
+            </div>';
+    }
+
+    $html_home_product .= '
+        <section class="data-home my-5">
+            <div class="container">
+                <div class="data-title flex mb-3">
+                    <b></b>
+                    <span>' . $category_name . '</span>
+                    <b></b>
+                </div>
+
+                <div class="list_product">
+                    ' . $html_home_pd . '
+                </div>
+                <div class="btn-all-box">
+                    <a class="btn-all" href="index.php?page=product&id=' . $category_id . '">Xem Tất Cả ' . $category_name . '</a>
+                </div>
+            </div>
+        </section>
+    ';
+}
 
 ?>
 
@@ -101,12 +175,78 @@ $html_hot_product = show_box_product($hot_product);
         </div>
     </section>
 
-    <section class="data-product-my-5">
+    <?= $html_home_product ?>
+
+    <section class="news my-5">
         <div class="container">
             <div class="data-title flex mb-3">
                 <b></b>
-                <span>LẮC TAY Nữ</span>
+                <span>Tin Tức</span>
                 <b></b>
             </div>
+
+            <div class="news_content">
+                <div class="box-news-left">
+                    <div class="box-new-img">
+                        <img src="uploads/n1.jpg" width="100%">
+                    </div>
+                    <div class="box-new-info">
+                        <p>5 món phụ kiến trang sức dành riêng cho cô nàng công sở</p>
+                        <p>Làm thế nào? để những cô nàng công sở có thể làm mới mình, luôn xinh đẹp và tràn ngập năng
+                            lượng nếu biết cách lựa chọn trang sức phụ kiện phù hợp. Và đâu là những item ...</p>
+                    </div>
+                </div>
+
+                <div class="box-news-right">
+                    <div class="box-news flex">
+                        <div class="box-new-img">
+                            <img src="uploads/n3.jpg" width="100%">
+                        </div>
+                        <div class="box-new-info">
+                            <p>5 món phụ kiến trang sức dành riêng cho cô nàng công sở</p>
+                            <p>Làm thế nào? để những cô nàng công sở có thể làm mới mình, luôn xinh đẹp và tràn ngập
+                                năng
+                                lượng nếu biết cách lựa chọn trang sức phụ kiện phù hợp. Và đâu là những item ...</p>
+                        </div>
+                    </div>
+
+                    <div class="box-news flex">
+                        <div class="box-new-img">
+                            <img src="uploads/n2.jpg" width="100%">
+                        </div>
+                        <div class="box-new-info">
+                            <p>5 món phụ kiến trang sức dành riêng cho cô nàng công sở</p>
+                            <p>Làm thế nào? để những cô nàng công sở có thể làm mới mình, luôn xinh đẹp và tràn ngập
+                                năng
+                                lượng nếu biết cách lựa chọn trang sức phụ kiện phù hợp. Và đâu là những item ...</p>
+                        </div>
+                    </div>
+
+                    <div class="box-news flex">
+                        <div class="box-new-img">
+                            <img src="uploads/n4.jpg" width="100%">
+                        </div>
+                        <div class="box-new-info">
+                            <p>5 món phụ kiến trang sức dành riêng cho cô nàng công sở</p>
+                            <p>Làm thế nào? để những cô nàng công sở có thể làm mới mình, luôn xinh đẹp và tràn ngập
+                                năng
+                                lượng nếu biết cách lựa chọn trang sức phụ kiện phù hợp. Và đâu là những item ...</p>
+                        </div>
+                    </div>
+
+                    <div class="box-news flex">
+                        <div class="box-new-img">
+                            <img src="uploads/n2.jpg" width="100%">
+                        </div>
+                        <div class="box-new-info">
+                            <p>5 món phụ kiến trang sức dành riêng cho cô nàng công sở</p>
+                            <p>Làm thế nào? để những cô nàng công sở có thể làm mới mình, luôn xinh đẹp và tràn ngập
+                                năng
+                                lượng nếu biết cách lựa chọn trang sức phụ kiện phù hợp. Và đâu là những item ...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </main>

@@ -156,3 +156,15 @@ function show_box_product($list_product)
 
     return $html_box_product;
 }
+
+function getCategoriesWithHomeFlag()
+{
+    $sql = "SELECT * FROM category WHERE home = 1";
+    return pdo_query($sql, );
+}
+
+function getProductsByCategoryId($categoryId)
+{
+    $sql = "SELECT * FROM product WHERE id_category = ?";
+    return pdo_query($sql, $categoryId);
+}
