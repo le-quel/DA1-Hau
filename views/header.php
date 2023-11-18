@@ -86,10 +86,10 @@ foreach ($categories as $category) {
 
         <ul class="header__menu">
             <div class="container flex">
-                <li><a href="">Trang Chủ</a></li>
-                <li><a href="">Giới Thiệu</a></li>
+                <li><a href="index.php?page=home">Trang Chủ</a></li>
+                <li><a href="index.php?page=about">Giới Thiệu</a></li>
                 <?= $html_categories ?>
-                <li><a href="">Blog</a></li>
+                <li><a href="index.php?page=blog">Blog</a></li>
             </div>
         </ul>
     </header>
