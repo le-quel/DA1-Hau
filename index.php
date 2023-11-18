@@ -89,6 +89,16 @@ if (isset($_GET['page'])) {
             }
             break;
 
+        case 'product':
+
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id_category = $_GET['id'];
+
+                $product_product_page = get_products_by_category($id_category);
+            }
+            require_once "views/product.php";
+            break;
+
         //chức năng đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {

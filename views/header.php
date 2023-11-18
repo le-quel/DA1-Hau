@@ -28,7 +28,7 @@ foreach ($categories as $category) {
     extract($category);
 
     $html_categories .= '
-    <li><a href="index.php?page=category&id=' . $id . '">' . $name . '</a></li>
+    <li><a href="index.php?page=product&id=' . $id . '">' . $name . '</a></li>
     ';
 }
 ?>

@@ -23,6 +23,15 @@
 //     }
 // }
 
+function get_products_by_category($id_category)
+{
+    $sql = "SELECT product.*, category.name AS category_name
+            FROM product
+            JOIN category ON product.id_category = category.id
+            WHERE id_category = ?";
+    return pdo_query($sql, $id_category);
+}
+
 function list_product()
 {
     $sql = "SELECT * FROM product ORDER BY id DESC";
