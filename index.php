@@ -152,6 +152,20 @@ if (isset($_GET['page'])) {
             break;
 
         case 'cart':
+
+            if (isset($_GET['act']) && $_GET['act'] == 'del1' && isset($_GET['id'])) {
+                $id_product = $_GET['id'];
+
+                foreach ($_SESSION["cart"] as $key => $item) {
+                    if ($item['id_product'] == $id_product) {
+                        unset($_SESSION["cart"][$key]);
+                        break;
+                    }
+                }
+
+                header('Location: index.php?page=cart');
+            }
+
             require_once "views/cart.php";
             break;
 
