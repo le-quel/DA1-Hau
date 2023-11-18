@@ -103,9 +103,8 @@ if (isset($product_detail['id_category'])) {
 
                     <div class="form-group mb-3">
                         <input type="hidden" name="id_product" value="<?= $product_detail['id'] ?>">
-                        <input type="hidden" name="name_product" value="value=" <?= $product_detail['name'] ?>"">
-                        <input type="hidden" name="price_product" value=" 
-                        <?php
+                        <input type="hidden" name="name_product" value="<?= $product_detail['name'] ?>">
+                        <input type="hidden" name="price_product" value="<?php
                         if (isset($product_detail['sale']) && $product_detail['sale'] > 0) {
                             echo $discountedPrice;
                         } else {
@@ -113,7 +112,7 @@ if (isset($product_detail['id_category'])) {
                         }
                         ?>">
                         <input type="hidden" name="image_product" value="<?= $product_detail['image'] ?>">
-                        <input type="submit" value="Thêm Vào Giỏ Hàng" class="btn-form my-4">
+                        <input type="submit" value="Thêm Vào Giỏ Hàng" class="btn-form my-4" name="btn-addToCart">
                     </div>
                 </form>
             </div>

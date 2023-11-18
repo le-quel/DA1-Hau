@@ -1,6 +1,10 @@
 <?php
 session_start();
 ob_start();
+
+if (!isset($_SESSION["cart"])) {
+    $_SESSION["cart"] = [];
+}
 //connect db
 require_once "models/pdo.php";
 //connect user
@@ -108,6 +112,47 @@ if (isset($_GET['page'])) {
 
             }
             require_once "views/detail.php";
+            break;
+
+        case 'addToCart':
+
+            if (isset($_POST['btn-addToCart']) && $_POST['btn-addToCart']) {
+                $id_product = $_POST['id_product'];
+                $quantity = $_POST['quantity'];
+                $name_product = $_POST['name_product'];
+                $price_product = $_POST['price_product'];
+                $image_product = $_POST['image_product'];
+
+                $pdCart = array(
+                    'id_product' => $id_product,
+                    'quantity' => $quantity,
+                    'name_product' => $name_product,
+                    'price_product' => $price_product,
+                    'image_product' => $image_product
+                );
+
+                if (!isset($_SESSION["cart"])) {
+                    $_SESSION["cart"] = array();
+                }
+
+                $product_exists = false;
+                foreach ($_SESSION["cart"] as &$item) {
+                    if ($item['id_product'] == $id_product) {
+                        $item['quantity'] += $quantity;
+                        $product_exists = true;
+                        break;
+                    }
+                }
+
+                if (!$product_exists) {
+                    array_push($_SESSION["cart"], $pdCart);
+                }
+                header('Location: index.php?page=cart');
+            }
+            break;
+
+        case 'cart':
+            require_once "views/cart.php";
             break;
 
         //chức năng đăng xuất

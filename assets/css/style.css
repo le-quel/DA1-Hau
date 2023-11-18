@@ -72,7 +72,7 @@ li {
     height: 24px;
 }
 
-.header__icon-cart{
+.header__icon-cart a {
     justify-content: center;
     border-radius: 4px;
     gap: 12px;
@@ -81,7 +81,7 @@ li {
     color: #fff;
 }
 
-.header__icon-cart p{
+.header__icon-cart a p{
     margin-bottom: 0;
     font-size: 16px;
     font-weight: 500;
@@ -472,4 +472,16 @@ b{
     font-size: 18px;
     font-weight: 400;
 
+}
+
+.total_price{
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(241, 55, 55);
+    text-align: right   ;
+}
+
+.empty-cart{
+    font-size: 32px;
+    font-weight: 500;
 }
