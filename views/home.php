@@ -42,17 +42,19 @@ foreach ($categories as $category) {
 
         $html_home_pd .= '
             <div class="box-product">
-                <div class="box-img">
-                    <img src="uploads/' . $product['image'] . '" width="100%">
-                </div>
+                <a href="index.php?page=detail&id=' . $product['id'] . '">
+                    <div class="box-img">
+                        <img src="uploads/' . $product['image'] . '" width="100%">
+                    </div>
 
-                <div class="box-info">
-                    <p class="box-category">' . $category_name . '</p>
-                    <p class="box-name">' . $product['name'] . '</p>
-                    ' . $box_price . '
-                </div>
+                    <div class="box-info">
+                        <p class="box-category">' . $category_name . '</p>
+                        <p class="box-name">' . $product['name'] . '</p>
+                        ' . $box_price . '
+                    </div>
 
-                ' . $box_sale . '
+                    ' . $box_sale . '
+                </a>
             </div>';
     }
 

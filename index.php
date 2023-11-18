@@ -99,6 +99,17 @@ if (isset($_GET['page'])) {
             require_once "views/product.php";
             break;
 
+        case 'detail':
+
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id_product = $_GET['id'];
+
+                $product_detail = get_product_by_id($id_product);
+
+            }
+            require_once "views/detail.php";
+            break;
+
         //chức năng đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {

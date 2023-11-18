@@ -368,3 +368,108 @@ b{
 .box-news{
     gap: 12px;
 }
+
+.breadcrumb{
+    justify-content: start;
+    gap: 12px;
+}
+
+.breadcrumb p{
+    margin-bottom: 0;
+    color: #000;
+    font-weight: 500;
+}
+
+.info_product{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 32px;
+}
+
+.thumbnail_img{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.ct_name{
+    font-size: 32px;
+    margin: 0;
+    font-weight: 500;
+}
+
+.ct_line{
+    width: 10%;
+    height: 3px;
+    background: #ccc;
+    margin: 12px 0;
+}
+
+.ct_price{
+    font-size: 26px;
+    font-weight: 500;
+    color: rgb(241, 55, 55);
+    margin: 0;
+}
+
+.ct_price span{
+    text-decoration: line-through;
+    color: #ccc;
+    font-size: 22px;
+    font-weight: 400;
+    display: inline-block;
+    margin-left: 12px ;
+}
+.ct_qt{
+    font-size: 18px;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.description{
+    padding-left: 18px;
+}
+
+.description li{
+    list-style: disc;
+    font-size: 18px;
+    margin: 4px 0;
+}
+
+.form-quantity{
+    justify-content: start;
+    gap: 32px;
+}
+
+.form-quantity p{
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#decrement,#increment{
+    padding:6px 18px;
+    border: 1px solid #333;
+    outline: none;
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.form-quantity input{
+    border: 1px solid #333;
+    padding: 6px 12px;
+    width: 50px;
+    text-align: center;
+}
+
+.desc_name{
+    font-size: 24px;
+}
+.desc_content pre{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+
+}

@@ -25,7 +25,7 @@
 
 function get_products_by_category($id_category)
 {
-    $sql = "SELECT product.*, category.name AS category_name
+    $sql = "SELECT product.*, category.name AS category_name, category.id AS category_id
             FROM product
             JOIN category ON product.id_category = category.id
             WHERE id_category = ?";
@@ -58,20 +58,25 @@ function get_products_by_home()
 }
 
 
-// function hang_hoa_select_by_id($ma_hh){
-//     $sql = "SELECT * FROM hang_hoa WHERE ma_hh=?";
-//     return pdo_query_one($sql, $ma_hh);
-// }
+function get_product_by_id($id_product)
+{
+    $sql = "SELECT product.*, category.name AS category_name
+            FROM product
+            JOIN category ON product.id_category = category.id
+            WHERE product.id=?";
+    return pdo_query_one($sql, $id_product);
+}
 
 // function hang_hoa_exist($ma_hh){
 //     $sql = "SELECT count(*) FROM hang_hoa WHERE ma_hh=?";
 //     return pdo_query_value($sql, $ma_hh) > 0;
 // }
 
-// function hang_hoa_tang_so_luot_xem($ma_hh){
-//     $sql = "UPDATE hang_hoa SET so_luot_xem = so_luot_xem + 1 WHERE ma_hh=?";
-//     pdo_execute($sql, $ma_hh);
-// }
+function view_product($id_product)
+{
+    $sql = "UPDATE product SET view = view + 1 WHERE id=?";
+    pdo_execute($sql, $id_product);
+}
 
 // function hang_hoa_select_top10(){
 //     $sql = "SELECT * FROM hang_hoa WHERE so_luot_xem > 0 ORDER BY so_luot_xem DESC LIMIT 0, 10";
@@ -83,10 +88,6 @@ function get_products_by_home()
 //     return pdo_query($sql);
 // }
 
-// function hang_hoa_select_by_loai($ma_loai){
-//     $sql = "SELECT * FROM hang_hoa WHERE ma_loai=?";
-//     return pdo_query($sql, $ma_loai);
-// }
 
 // function hang_hoa_select_keyword($keyword){
 //     $sql = "SELECT * FROM hang_hoa hh "
@@ -149,18 +150,20 @@ function show_box_product($list_product)
 
         $html_box_product .= '
             <div class="box-product">
-                <div class="box-img">
-                    <img src="uploads/' . $image . '" width="100%">
-                </div>
+                <a href="index.php?page=detail&id=' . $id . '">
+                    <div class="box-img">
+                        <img src="uploads/' . $image . '" width="100%">
+                    </div>
 
-                <div class="box-info">
-                    <p class="box-category">' . $category_name . '</p>
-                    <p class="box-name">' . $name . '</p>
-                    ' . $box_price . '
-                </div>
+                    <div class="box-info">
+                        <p class="box-category">' . $category_name . '</p>
+                        <p class="box-name">' . $name . '</p>
+                        ' . $box_price . '
+                    </div>
 
-                ' . $box_sale . '
-                </div>';
+                    ' . $box_sale . '
+                </a>
+            </div>';
     }
 
     return $html_box_product;
