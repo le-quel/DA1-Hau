@@ -13,7 +13,7 @@ foreach ($_SESSION['cart'] as $pdCart) {
 ?>
 
 <main class="my-5">
-    <form action="" method="POSt">
+    <form action="index.php?page=bill" method="POSt">
         <div class="container">
             <div class="checkout-container">
                 <div class="checkout-form">
@@ -59,7 +59,7 @@ foreach ($_SESSION['cart'] as $pdCart) {
                     <h4 class="mb-4">Thông Tin Đơn Hàng</h4>
 
                     <div class="table-review-cart">
-                        <table class="table">
+                        <table class="table ">
                             <thead>
                                 <th>Sản Phẩm</th>
                                 <th>Giá</th>
@@ -103,7 +103,14 @@ foreach ($_SESSION['cart'] as $pdCart) {
                 </div>
             </div>
             <div class="form-group mt-3 mb-3 form-container">
-                <input type="submit" value="Thanh Toán" class="btn-form">
+                <input type="hidden" name="total_price" value="<?php
+                $total_price = 0;
+                foreach ($_SESSION['cart'] as $pdCart) {
+                    $total_price += $pdCart['price_product'] * $pdCart['quantity'];
+                }
+                echo $total_price;
+                ?>">
+                <input type="submit" value="Thanh Toán" class="btn-form" name="btn-bill">
                 <a href="index.php?page=cart" class="text-center d-block mt-3">Quay Lại</a>
             </div>
         </div>

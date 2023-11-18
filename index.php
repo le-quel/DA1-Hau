@@ -13,6 +13,8 @@ require_once "models/user.php";
 require_once "models/category.php";
 //connect product
 require_once "models/product.php";
+//connect bill
+require_once "models/bill.php";
 
 //data home
 $hot_product = hot_product();
@@ -180,8 +182,59 @@ if (isset($_GET['page'])) {
         case 'checkout':
             require_once "views/checkout.php";
             break;
-    }
 
+        case 'bill':
+            if (isset($_POST['btn-bill']) && $_POST['btn-bill']) {
+                $fullname = $_POST['fullname'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $address = $_POST['address'];
+                $payment = $_POST['payment'];
+                $transport = $_POST['transport'];
+                $total_price = $_POST['total_price'];
+
+                if (isset($_SESSION['user']) && count($_SESSION['user']) > 0) {
+                    $id_user = $_SESSION['user']['id'];
+                } else {
+                    $id_user = null;
+                }
+                $bill = array(
+                    'id_user' => $id_user,
+                    'fullname' => $fullname,
+                    'email' => $email,
+                    'phone' => $phone,
+                    'address' => $address,
+                    'payment' => $payment,
+                    'transport' => $transport,
+                    'total_price' => $total_price
+                );
+
+                $bill_id = bill_insert($bill);
+
+                foreach ($_SESSION["cart"] as $pdCart) {
+                    $bill_detail = array(
+                        'bill_id' => $bill_id,
+                        'product_id' => $pdCart['id_product'],
+                        'quantity' => $pdCart['quantity']
+                    );
+
+                    bill_detail_insert($bill_detail);
+                }
+
+                unset($_SESSION["cart"]);
+                header('Location: index.php?page=success');
+            }
+            break;
+
+        case 'success':
+            require_once "views/success.php";
+            break;
+
+        default:
+            http_response_code(404);
+            require_once "views/404.php";
+            break;
+    }
 } else {
     require_once "views/home.php";
 }
