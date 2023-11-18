@@ -38,6 +38,8 @@ if (!empty($_SESSION["cart"]) && count($_SESSION["cart"]) > 0) {
     echo '      </tbody>
             </table>
             <p class="total_price">Tổng Tiền : ' . number_format($total_price, 0, ',', '.') . ' đ</p>
+
+            <a href="index.php?page=checkout" class="btn btn-outline-dark">Thanh Toán</a>
         </div>';
 } else {
     echo '

@@ -176,6 +176,10 @@ if (isset($_GET['page'])) {
             }
             header('Location: index.php?page=login');
             break;
+
+        case 'checkout':
+            require_once "views/checkout.php";
+            break;
     }
 
 } else {

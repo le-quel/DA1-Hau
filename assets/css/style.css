@@ -485,3 +485,9 @@ b{
     font-size: 32px;
     font-weight: 500;
 }
+
+.checkout-container{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 32px;
+}
