@@ -34,7 +34,6 @@ function addUser($id, $username, $password, $fullname, $email, $phone, $address,
     try{
         $sql = "INSERT INTO user (username, password, fullname, email, phone, address, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
         return  pdo_execute($sql, $username, $password, $fullname, $email, $phone, $address, $role);
-        echo "Thêm Thành Công! ";
     }catch (PDOException $e) {
         echo "Thêm thất bại! " . $e->getMessage();
     }
