@@ -53,11 +53,7 @@
 </footer>
 
 <div class="copyright">
-<<<<<<< HEAD
-    <p>© 2021 TLEE JEWELRY. All Rights Reserved.</p>
-=======
     <p>© 2023 TranNguyenTrungHau. All Rights Reserved.</p>
->>>>>>> 02db119d6f688fce9f4b2ad463734e532517b961
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
