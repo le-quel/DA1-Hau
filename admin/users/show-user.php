@@ -30,8 +30,8 @@
             echo 'Admin';
         }
         ?></td>
-            <td><a href="index.php?page=update-user$id=">Sửa</a>|
-                <a href="index.php?page=del-user&id=">Xóa</a>
+            <td><a href="index.php?page=update-user&id=<?php echo $user['id']?>">Sửa</a>|
+                <a href=" index.php?page=del-user&id=<?php echo $user['id']?>">Xóa</a>
             </td>
         </tr>
         <?php $i++; } ?>

@@ -1,27 +1,41 @@
 <?php
-// require_once 'pdo.php';
+function add_product($id, $name, $image, $gallery, $price, $sale, $info,$view, $hot,$quantity, $id_category) {
+    try {
+        $sql = "INSERT INTO product(name, image, gallery, price, sale, info,view, hot, quantity, id_category, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,NOW())";
+        pdo_execute($sql, $name, $image, json_encode($gallery, JSON_FORCE_OBJECT),  $price, $sale, $info,$view, $hot,$quantity, $id_category);
+        echo "Thêm thành công !";
+    } catch (PDOException $e) {
+        echo "Thêm thất bại: " . $e->getMessage();
+    }
+}
 
-// function hang_hoa_insert($ten_hh, $don_gia, $giam_gia, $hinh, $ma_loai, $dac_biet, $so_luot_xem, $ngay_nhap, $mo_ta){
-//     $sql = "INSERT INTO hang_hoa(ten_hh, don_gia, giam_gia, hinh, ma_loai, dac_biet, so_luot_xem, ngay_nhap, mo_ta) VALUES (?,?,?,?,?,?,?,?,?)";
-//     pdo_execute($sql, $ten_hh, $don_gia, $giam_gia, $hinh, $ma_loai, $dac_biet==1, $so_luot_xem, $ngay_nhap, $mo_ta);
-// }
 
-// function hang_hoa_update($ma_hh, $ten_hh, $don_gia, $giam_gia, $hinh, $ma_loai, $dac_biet, $so_luot_xem, $ngay_nhap, $mo_ta){
-//     $sql = "UPDATE hang_hoa SET ten_hh=?,don_gia=?,giam_gia=?,hinh=?,ma_loai=?,dac_biet=?,so_luot_xem=?,ngay_nhap=?,mo_ta=? WHERE ma_hh=?";
-//     pdo_execute($sql, $ten_hh, $don_gia, $giam_gia, $hinh, $ma_loai, $dac_biet==1, $so_luot_xem, $ngay_nhap, $mo_ta, $ma_hh);
-// }
+function getone_product($id){
+    $sql = "SELECT * FROM product WHERE id=?";
+    return pdo_query($sql,$id);
+}
 
-// function hang_hoa_delete($ma_hh){
-//     $sql = "DELETE FROM hang_hoa WHERE  ma_hh=?";
-//     if(is_array($ma_hh)){
-//         foreach ($ma_hh as $ma) {
-//             pdo_execute($sql, $ma);
-//         }
-//     }
-//     else{
-//         pdo_execute($sql, $ma_hh);
-//     }
-// }
+function update_product($id, $name, $image, $gallery, $price, $sale, $info,$view, $hot,$quantity, $id_category) {
+    try {
+        $sql = "UPDATE product SET name=?, image=?, gallery=?, price=?, sale=?, info=?, view=?, hot=?, quantity=?, id_category=?, created_at=NOW(), update_at=NOW() WHERE id=?";
+        pdo_execute($sql, $name, $image, json_encode($gallery, JSON_FORCE_OBJECT),  $price, $sale, $info,$view, $hot,$quantity, $id_category, $id);
+        echo "Chỉnh sửa thành công";
+    } catch (PDOException $e) {
+        echo "Chỉnh Sửa thất bại! " . $e->getMessage();
+    }
+}
+
+function del_product($id){
+    $sql = "DELETE FROM product WHERE  id=?";
+    if(is_array($id)){
+        foreach ($id as $ma) {
+            pdo_execute($sql, $ma);
+        }
+    }
+    else{
+        pdo_execute($sql, $id);
+    }
+}
 
 function get_products_by_category($id_category)
 {

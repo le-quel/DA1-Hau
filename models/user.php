@@ -41,10 +41,26 @@ function addUser($id, $username, $password, $fullname, $email, $phone, $address,
    
 }
 
-// function khach_hang_update($ma_kh, $mat_khau, $ho_ten, $email, $hinh, $kich_hoat, $vai_tro){
-//     $sql = "UPDATE khach_hang SET mat_khau=?,ho_ten=?,email=?,hinh=?,kich_hoat=?,vai_tro=? WHERE ma_kh=?";
-//     pdo_execute($sql, $mat_khau, $ho_ten, $email, $hinh, $kich_hoat==1, $vai_tro==1, $ma_kh);
-// }
+    function getoneuser($id){
+        $sql = "SELECT * FROM user WHERE  id=?";
+        return  pdo_query($sql, $id);
+    }
+
+function updateUser($id, $username, $password, $fullname, $email, $phone, $address, $role){
+    $sql = "UPDATE User SET username=?,password=?,fullname=?,email=?,phone=?,address=?, role=? WHERE id=?";
+    pdo_execute($sql,$username, $password, $fullname, $email, $phone, $address, $role, $id);
+}
+function deluser($id){
+    $sql = "DELETE FROM user WHERE id=?";
+    if(is_array($id)){
+        foreach ($id as $ma) {
+            pdo_execute($sql, $ma);
+        }
+    }
+    else{
+        pdo_execute($sql, $id);
+    }
+}
 
 // function khach_hang_delete($ma_kh){
 //     $sql = "DELETE FROM khach_hang  WHERE ma_kh=?";
