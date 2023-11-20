@@ -230,6 +230,25 @@ if (isset($_GET['page'])) {
             require_once "views/success.php";
             break;
 
+        case 'order':
+
+            if (isset($_POST['btn-search-order']) && $_POST['btn-search-order']) {
+                $search_order = $_POST['search-order'];
+                $order = bill_search($search_order);
+                $id_bill = $order['id'];
+
+                if (isset($order)) {
+                    $order_details = bill_detail_search($id_bill);
+
+                    $id_product = $order_details['id_product'];
+
+                    $product_order = get_product_by_id($id_product);
+                }
+            }
+
+            require_once "views/order.php";
+            break;
+
         default:
             http_response_code(404);
             require_once "views/404.php";
