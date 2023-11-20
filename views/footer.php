@@ -9,10 +9,17 @@
                 <li>Đại diện: Trần Nguyễn Trung Hậu.</li>
                 <li>Mã ĐKKD: 04J800433085</li>
                 <li>Mã số thuế: 87683657ds44-001</li>
+<<<<<<< HEAD
                 <li>Ngày cấp: 05/04/2022</li>
                 <li>Nơi cấp: Phòng tài chính – KH – UBND Quận 12</li>
                 <li>Số điện thoại: 0857.241.xxx</li>
                 <li>Email: tleejewelry.cskh@gmail.com</li>
+=======
+                <li>Ngày cấp: 30/2/2023</li>
+                <li>Nơi cấp: Phòng tài chính – KH – UBND Quận 12</li>
+                <li>Số điện thoại: 094.3939.805</li>
+                <li>Email: Trunghau2004318@gmail.com</li>
+>>>>>>> 02db119d6f688fce9f4b2ad463734e532517b961
             </ul>
         </div>
 
@@ -46,7 +53,11 @@
 </footer>
 
 <div class="copyright">
+<<<<<<< HEAD
     <p>© 2021 TLEE JEWELRY. All Rights Reserved.</p>
+=======
+    <p>© 2023 TranNguyenTrungHau. All Rights Reserved.</p>
+>>>>>>> 02db119d6f688fce9f4b2ad463734e532517b961
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

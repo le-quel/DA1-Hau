@@ -33,12 +33,12 @@ if (isset($_GET['page'])) {
             require_once "views/home.php";
             break;
 
-        //trang đăng nhập
+            //trang đăng nhập
         case 'login':
             require_once "views/login.php";
             break;
 
-        //chức năng đăng nhập
+            //chức năng đăng nhập
         case 'login-function':
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
                 $username = $_POST["username"];
@@ -59,12 +59,12 @@ if (isset($_GET['page'])) {
             }
             break;
 
-        //trang đăng ký
+            //trang đăng ký
         case 'register':
 
             require_once "views/register.php";
             break;
-        //chức năng đăng ký
+            //chức năng đăng ký
         case 'register-function':
 
             if (isset($_POST["btn-register"]) && $_POST["btn-register"]) {
@@ -111,7 +111,6 @@ if (isset($_GET['page'])) {
                 $id_product = $_GET['id'];
 
                 $product_detail = get_product_by_id($id_product);
-
             }
             require_once "views/detail.php";
             break;
@@ -171,7 +170,7 @@ if (isset($_GET['page'])) {
             require_once "views/cart.php";
             break;
 
-        //chức năng đăng xuất
+            //chức năng đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
                 session_destroy();
@@ -230,6 +229,25 @@ if (isset($_GET['page'])) {
             require_once "views/success.php";
             break;
 
+        case 'order':
+
+            if (isset($_POST['btn-search-order']) && $_POST['btn-search-order']) {
+                $search_order = $_POST['search-order'];
+                $order = bill_search($search_order);
+                $id_bill = $order['id'];
+
+                if (isset($order)) {
+                    $order_details = bill_detail_search($id_bill);
+
+                    $id_product = $order_details['id_product'];
+
+                    $product_order = get_product_by_id($id_product);
+                }
+            }
+
+            require_once "views/order.php";
+            break;
+
         default:
             http_response_code(404);
             require_once "views/404.php";
@@ -242,4 +260,3 @@ if (isset($_GET['page'])) {
 require_once "views/footer.php";
 
 ob_end_flush();
-?>

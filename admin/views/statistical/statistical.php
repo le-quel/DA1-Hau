@@ -18,6 +18,7 @@ foreach ($list_tksp as $tksp) {
 ?>
 <main>
     <div class="container">
+<<<<<<< HEAD
         <ul class="nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link active" href="index.php?page=category">Danh Mục</a>
@@ -31,6 +32,8 @@ foreach ($list_tksp as $tksp) {
 
         </ul>
 
+=======
+>>>>>>> 02db119d6f688fce9f4b2ad463734e532517b961
         <h2 class="text-center my-5">Thống Kê Sản Phẩm Theo Danh Mục</h2>
 
         <table class="table table-bordered">

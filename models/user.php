@@ -26,37 +26,40 @@ function user_insert($username, $email, $password)
     $sql = "INSERT INTO user(username, email, password,created_at) VALUES (?, ?, ?,NOW())";
     pdo_execute($sql, $username, $email, $password);
 }
-function render_alluser(){
+function render_alluser()
+{
     $sql = "SELECT * FROM user";
     return  pdo_query($sql);
 }
-function addUser($id, $username, $password, $fullname, $email, $phone, $address, $role){
-    try{
+function addUser($id, $username, $password, $fullname, $email, $phone, $address, $role)
+{
+    try {
         $sql = "INSERT INTO user (username, password, fullname, email, phone, address, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
         return  pdo_execute($sql, $username, $password, $fullname, $email, $phone, $address, $role);
-    }catch (PDOException $e) {
+    } catch (PDOException $e) {
         echo "Thêm thất bại! " . $e->getMessage();
     }
-   
 }
 
-    function getoneuser($id){
-        $sql = "SELECT * FROM user WHERE  id=?";
-        return  pdo_query($sql, $id);
-    }
+function getoneuser($id)
+{
+    $sql = "SELECT * FROM user WHERE  id=?";
+    return  pdo_query($sql, $id);
+}
 
-function updateUser($id, $username, $password, $fullname, $email, $phone, $address, $role){
+function updateUser($id, $username, $password, $fullname, $email, $phone, $address, $role)
+{
     $sql = "UPDATE User SET username=?,password=?,fullname=?,email=?,phone=?,address=?, role=? WHERE id=?";
-    pdo_execute($sql,$username, $password, $fullname, $email, $phone, $address, $role, $id);
+    pdo_execute($sql, $username, $password, $fullname, $email, $phone, $address, $role, $id);
 }
-function deluser($id){
+function deluser($id)
+{
     $sql = "DELETE FROM user WHERE id=?";
-    if(is_array($id)){
+    if (is_array($id)) {
         foreach ($id as $ma) {
             pdo_execute($sql, $ma);
         }
-    }
-    else{
+    } else {
         pdo_execute($sql, $id);
     }
 }

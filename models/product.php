@@ -1,8 +1,9 @@
 <?php
-function add_product($id, $name, $image, $gallery, $price, $sale, $info,$view, $hot,$quantity, $id_category) {
+function add_product($id, $name, $image, $gallery, $price, $sale, $info, $view, $hot, $quantity, $id_category)
+{
     try {
         $sql = "INSERT INTO product(name, image, gallery, price, sale, info,view, hot, quantity, id_category, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,NOW())";
-        pdo_execute($sql, $name, $image, json_encode($gallery, JSON_FORCE_OBJECT),  $price, $sale, $info,$view, $hot,$quantity, $id_category);
+        pdo_execute($sql, $name, $image, json_encode($gallery, JSON_FORCE_OBJECT),  $price, $sale, $info, $view, $hot, $quantity, $id_category);
         echo "Thêm thành công !";
     } catch (PDOException $e) {
         echo "Thêm thất bại: " . $e->getMessage();
@@ -10,29 +11,31 @@ function add_product($id, $name, $image, $gallery, $price, $sale, $info,$view, $
 }
 
 
-function getone_product($id){
+function getone_product($id)
+{
     $sql = "SELECT * FROM product WHERE id=?";
-    return pdo_query($sql,$id);
+    return pdo_query($sql, $id);
 }
 
-function update_product($id, $name, $image, $gallery, $price, $sale, $info,$view, $hot,$quantity, $id_category) {
+function update_product($id, $name, $image, $gallery, $price, $sale, $info, $view, $hot, $quantity, $id_category)
+{
     try {
         $sql = "UPDATE product SET name=?, image=?, gallery=?, price=?, sale=?, info=?, view=?, hot=?, quantity=?, id_category=?, created_at=NOW(), update_at=NOW() WHERE id=?";
-        pdo_execute($sql, $name, $image, json_encode($gallery, JSON_FORCE_OBJECT),  $price, $sale, $info,$view, $hot,$quantity, $id_category, $id);
+        pdo_execute($sql, $name, $image, json_encode($gallery, JSON_FORCE_OBJECT),  $price, $sale, $info, $view, $hot, $quantity, $id_category, $id);
         echo "Chỉnh sửa thành công";
     } catch (PDOException $e) {
         echo "Chỉnh Sửa thất bại! " . $e->getMessage();
     }
 }
 
-function del_product($id){
+function del_product($id)
+{
     $sql = "DELETE FROM product WHERE  id=?";
-    if(is_array($id)){
+    if (is_array($id)) {
         foreach ($id as $ma) {
             pdo_execute($sql, $ma);
         }
-    }
-    else{
+    } else {
         pdo_execute($sql, $id);
     }
 }
@@ -146,8 +149,7 @@ function show_box_product($list_product)
                 <p class="box-price">
                     ' . number_format($discountedPrice, 0, ',', '.') . 'đ
                     <span>' . number_format($price, 0, ',', '.') . 'đ</span>
-                </p>'
-            ;
+                </p>';
 
             $box_sale = '
                 <p class="box-sale">' . $sale . '%</p>
@@ -156,8 +158,7 @@ function show_box_product($list_product)
             $box_price = '
                 <p class="box-price">
                     ' . number_format($price, 0, ',', '.') . 'đ
-                </p>'
-            ;
+                </p>';
 
             $box_sale = '';
         }
@@ -186,7 +187,7 @@ function show_box_product($list_product)
 function getCategoriesWithHomeFlag()
 {
     $sql = "SELECT * FROM category WHERE home = 1";
-    return pdo_query($sql, );
+    return pdo_query($sql,);
 }
 
 function getProductsByCategoryId($categoryId)
