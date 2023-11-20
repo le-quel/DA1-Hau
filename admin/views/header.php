@@ -24,13 +24,9 @@ if (isset($_SESSION["admin"]) && is_array($_SESSION["admin"]) && (count($_SESSIO
     <header class="header__admin p-3">
         <div class="container">
             <div class="header__logo">
-<<<<<<< HEAD
                 <a href="index.php">
                     <img src="../uploads/logo.png" width="100%">
                 </a>
-=======
-                <img src="../uploads/logo.png" width="100%">
->>>>>>> 02db119d6f688fce9f4b2ad463734e532517b961
             </div>
 
             <ul class="admin__menu">
