@@ -1,5 +1,4 @@
 <main>
-<<<<<<< HEAD
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a class="nav-link active" href="index.php?page=category">Danh Mục</a>
@@ -12,7 +11,5 @@
         </li>
 
     </ul>
-=======
->>>>>>> 02db119d6f688fce9f4b2ad463734e532517b961
     Trang Home
 </main>
