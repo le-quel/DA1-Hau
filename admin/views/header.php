@@ -29,9 +29,21 @@ if (isset($_SESSION["admin"]) && is_array($_SESSION["admin"]) && (count($_SESSIO
                 </a>
             </div>
 
-            <ul class="admin__menu">
-                <li><a href="index.php?page=statistical">Thống Kê</a></li>
-            </ul>
+            <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" href="index.php?page=statistical">Thống Kê</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="index.php?page=category">Danh Mục</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="index.php?page=product">Sản Phẩm</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="index.php?page=user">Người Dùng</a>
+        </li>
+
+    </ul>
 
             <div class="header__logout flex">
                 <p>Xin chào

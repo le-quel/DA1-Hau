@@ -613,6 +613,33 @@ b {
   padding-left: 0;
   margin-bottom: 0;
 }
+/* Style for the menu container */
+.admin__menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style for the menu items */
+.admin__menu li {
+  display: inline-block;
+  margin-right: 10px; /* Adjust the spacing between menu items */
+}
+
+/* Style for the menu links */
+.admin__menu a {
+  text-decoration: none;
+  color: #333; /* Adjust the text color */
+  padding: 5px 10px; /* Adjust the padding for each menu item */
+  border: 1px solid #ccc; /* Add a border to each menu item */
+  border-radius: 5px; /* Add rounded corners to the menu items */
+}
+
+/* Hover effect for the menu links */
+.admin__menu a:hover {
+  background-color: #f0f0f0; /* Change the background color on hover */
+}
+
 
 .header__logout p {
   margin-bottom: 0;
