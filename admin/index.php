@@ -106,6 +106,7 @@ if (isset($_GET["page"])) {
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                 move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
                 update_product($id, $name, $image, $gallery, $price, $sale, $info, $view, $hot, $quantity, $id_category);
+                header("Location: index.php?page=product");
             }
             $list_category = category_select_all();
             require_once "products/update-product.php";
@@ -141,6 +142,7 @@ if (isset($_GET["page"])) {
                 $home = $_POST['home'];
 
                 updatecategory($id, $name, $home);
+                header("Location: index.php?page=category");
             }
 
             require_once "categorys/update-category.php";
@@ -188,6 +190,7 @@ if (isset($_GET["page"])) {
                 $role = $_POST['role'];
                 $user = render_alluser();
                 updateUser($id, $username, $password, $fullname, $email, $phone, $address, $role);
+                header("Location: index.php?page=user");
             }
             $user = render_alluser();
             require_once "users/update-user.php";
