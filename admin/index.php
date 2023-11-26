@@ -45,26 +45,56 @@ if (isset($_GET["page"])) {
                 $view = $_POST['view'];
                 $hot = $_POST['hot'];
                 $quantity = $_POST['quantity'];
-                $img1 = $_FILES['img1']['name'];
-                $img2 = $_FILES['img2']['name'];
-                $img3 = $_FILES['img3']['name'];
-                $img4 = $_FILES['img4']['name'];
-                $gallery = array(
-                    'img1' => $img1,
-                    'img2' => $img2,
-                    'img3' => $img3,
-                    'img4' => $img4,
-                );
-                $target_dir = "../uploads/";
 
-                $target_file = $target_dir . basename($_FILES['image']['name']);
+              
+                // Xử lý tải lên ảnh chính
+                $image_path = "";
+                if ($_FILES["image"]["error"] == UPLOAD_ERR_OK) {
+                    $target_dir = "../Uploads/";
+                    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                        $image_path = $target_file;
+                    } else {
+                        $message = "Lỗi khi tải lên ảnh.";
+                    }
+                }
+        
+                $gallery_images = [];
+                // $target_dir_gallery = "../Uploads";
+                $target_dir = "../Uploads/";
+                if (isset($_FILES["gallery"])) {
+                    foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
+                        $gallery_image_name = $_FILES["gallery"]["name"][$key];
+                        $gallery_target_file = $target_dir . basename($gallery_image_name);
+                        // Chỉ xử lý ảnh nếu người dùng đã tải lên
+                        if ($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
+                            if (move_uploaded_file($tmp_name, $gallery_target_file)) {
+                                $gallery_images[] = $gallery_target_file;
+                            } else {
+                                $message = "Lỗi khi tải lên ảnh trong gallery.";
+                                break;
+                            }
+                        }
+                    }
+                }
+        
+                if (empty($message)) {
+                    $galleryData = ["images" => $gallery_images];
+                    $jsonGallery = json_encode($gallery_images);
+        
+                   // Insert product data
+                try {
+                    $sql = "INSERT INTO product(name, image, gallery, price, sale, info,view, hot, quantity, id_category, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,NOW())";
+                 
+                    pdo_execute($sql, $name, $image_path, $jsonGallery,  $price, $sale, $info, $view, $hot, $quantity, $id_category);
+                  
 
-                $image = $target_file;
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
-                add_product($id, $name, $image, $gallery, $price, $sale, $info, $view, $hot, $quantity, $id_category);
-            }
+                    echo "Thêm thành công!";
+                }catch (PDOException $e) {
+                    echo "Thêm thất bại: " . $e->getMessage();
+                }
+                                }
+                            }
             $list_category = category_select_all();
             require_once "products/add-product.php";
             break;
@@ -87,16 +117,7 @@ if (isset($_GET["page"])) {
                 $view = $_POST['view'];
                 $hot = $_POST['hot'];
                 $quantity = $_POST['quantity'];
-                $img1 = $_FILES['img1']['name'];
-                $img2 = $_FILES['img2']['name'];
-                $img3 = $_FILES['img3']['name'];
-                $img4 = $_FILES['img4']['name'];
-                $gallery = array(
-                    'img1' => $img1,
-                    'img2' => $img2,
-                    'img3' => $img3,
-                    'img4' => $img4,
-                );
+               
                 $target_dir = "../Uploads/";
 
                 $target_file = $target_dir . basename($_FILES['image']['name']);

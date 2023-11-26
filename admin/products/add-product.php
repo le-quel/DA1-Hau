@@ -29,14 +29,9 @@
             </div>
 
             <div class="form-group mb-3">
-                <label for="gallery">Hình Ảnh Chi Tiết</label>
-                <input type="file" name="img1" id="img1" class="form-control d-block">
-                <input type="file" name="img2" id="img2" class="form-control d-block">
-                <input type="file" name="img3" id="img3" class="form-control d-block">
-                <input type="file" name="img4" id="img4" class="form-control d-block">
+                <label for="gallery">Bộ sưu tập</label>
+                <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple>
             </div>
-
-
 
             <div class="form-group mb-3">
                 <label for="price">Giá</label>
