@@ -3,6 +3,7 @@ if(isset($_SESSION['s_user'])&&(count($_SESSION['s_user'])>0))
 {
     extract($_SESSION['s_user']);
     $userinfo=get_user($id);
+    $_SESSION['s_user']=$userinfo;
     extract($userinfo);
 }
 ?>
@@ -10,7 +11,7 @@ if(isset($_SESSION['s_user'])&&(count($_SESSION['s_user'])>0))
     <div class="container">
         <h3 class="text-center mb-3">Thông tin khách hàng</h3>
 
-        <form action="index.php?page=profile_update" method="POST" class="form-container">
+        <form action="index.php" method="POST" class="form-container">
             <p class="err">
                 <?php
                 if (isset($_SESSION["message"]) && $_SESSION["message"] != "") {
@@ -36,14 +37,10 @@ if(isset($_SESSION['s_user'])&&(count($_SESSION['s_user'])>0))
                 <input type="password" name="password" value="<?=$password?>" id="password" class="form-control">
                 <span class="err" id="passwordErr"></span>
             </div>
-
-            <div class="form-group mb-3">
-                <input type="hidden" name="id" value="<?=$id?>">
-                <input type="submit" value="Cập nhật thông tin" class="btn-form" name="capnhat">
-            </div>
+            <p>Cập nhật thành công /<a class="text-danger" href="index.php">Quay về trang chủ</a></p>
+            
 
         </form>
     </div>
 
 </main>
-    </section>

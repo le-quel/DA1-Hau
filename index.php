@@ -229,12 +229,23 @@ if (isset($_GET['page'])) {
             require_once "views/success.php";
             break;
         case 'profile':
-            if(isset($_SESSION['user'])&&(count($_SESSION['user'])>0))
+            if(isset($_SESSION['s_user'])&&(count($_SESSION['s_user'])>0))
             {
                 include "views/profile.php";
             }
             
-            break;    
+            break;
+        case 'profile_update':
+            if(isset($_POST["capnhat"])&&($_POST["capnhat"])){
+                $username=$_POST["username"];
+                $password=$_POST["password"];
+                $email=$_POST["email"];
+                $id=$_POST["id"];
+                $role=0;
+                // xử lý
+                updateUser($id, $username, $password, $fullname, $email, $phone, $address, $role);
+                include "views/profile_update.php";
+            }
 
         case 'order':
 
