@@ -33,12 +33,12 @@ if (isset($_GET['page'])) {
             require_once "views/home.php";
             break;
 
-            //trang đăng nhập
+        //trang đăng nhập
         case 'login':
             require_once "views/login.php";
             break;
 
-            //chức năng đăng nhập
+        //chức năng đăng nhập
         case 'login-function':
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
                 $username = $_POST["username"];
@@ -59,12 +59,12 @@ if (isset($_GET['page'])) {
             }
             break;
 
-            //trang đăng ký
+        //trang đăng ký
         case 'register':
 
             require_once "views/register.php";
             break;
-            //chức năng đăng ký
+        //chức năng đăng ký
         case 'register-function':
 
             if (isset($_POST["btn-register"]) && $_POST["btn-register"]) {
@@ -170,9 +170,9 @@ if (isset($_GET['page'])) {
             require_once "views/cart.php";
             break;
 
-            //chức năng đăng xuất
+        //chức năng đăng xuất
         case 'logout':
-            if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
+            if (isset($_SESSION["s_user"]) && count($_SESSION["s_user"]) > 0) {
                 session_destroy();
             }
             header('Location: index.php?page=login');
@@ -228,23 +228,26 @@ if (isset($_GET['page'])) {
         case 'success':
             require_once "views/success.php";
             break;
+
         case 'profile':
-            if(isset($_SESSION['s_user'])&&(count($_SESSION['s_user'])>0))
-            {
+            if (isset($_SESSION['s_user']) && (count($_SESSION['s_user']) > 0)) {
                 include "views/profile.php";
             }
-            
+
             break;
+
         case 'profile_update':
-            if(isset($_POST["capnhat"])&&($_POST["capnhat"])){
-                $username=$_POST["username"];
-                $password=$_POST["password"];
-                $email=$_POST["email"];
-                $id=$_POST["id"];
-                $role=0;
+            if (isset($_POST["capnhat"]) && ($_POST["capnhat"])) {
+                $username = $_POST["username"];
+                $password = $_POST["password"];
+                $email = $_POST["email"];
+                $id = $_POST["id"];
+                $role = 0;
                 // xử lý
                 updateUser($id, $username, $password, $fullname, $email, $phone, $address, $role);
-                include "views/profile_update.php";
+                $message = 'Cập nhật thông tin thành công';
+                $_SESSION["message"] = $message;
+                header("Location: index.php?page=profile");
             }
 
         case 'order':
