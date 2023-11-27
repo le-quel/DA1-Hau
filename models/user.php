@@ -63,6 +63,10 @@ function deluser($id)
         pdo_execute($sql, $id);
     }
 }
+function get_user($id){
+    $sql="Select * FROM user WHERE id=?";
+    return pdo_query_one($sql, $id);
+}
 
 // function khach_hang_delete($ma_kh){
 //     $sql = "DELETE FROM khach_hang  WHERE ma_kh=?";

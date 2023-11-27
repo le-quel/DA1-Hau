@@ -11,5 +11,4 @@
         </li>
 
     </ul> -->
-    Trang Home
 </main>

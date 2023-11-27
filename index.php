@@ -47,7 +47,7 @@ if (isset($_GET['page'])) {
                 $result = checkUser($username, $password);
 
                 if (is_array($result) && count($result) > 0) {
-                    $_SESSION["user"] = $result;
+                    $_SESSION["s_user"] = $result;
                     extract($result);
                     header("Location: index.php");
                 } else {
@@ -228,6 +228,13 @@ if (isset($_GET['page'])) {
         case 'success':
             require_once "views/success.php";
             break;
+        case 'profile':
+            if(isset($_SESSION['user'])&&(count($_SESSION['user'])>0))
+            {
+                include "views/profile.php";
+            }
+            
+            break;    
 
         case 'order':
 

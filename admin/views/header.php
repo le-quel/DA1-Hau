@@ -5,6 +5,8 @@ if (isset($_SESSION["admin"]) && is_array($_SESSION["admin"]) && (count($_SESSIO
 } else {
     header('Location: login.php');
 }
+
+
 ?>
 
 <!DOCTYPE html>
