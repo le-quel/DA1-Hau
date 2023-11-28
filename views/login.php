@@ -26,7 +26,9 @@
             </div>
 
             <p>Bạn Chưa Có Tài Khoản ? <a class="text-danger" href="index.php?page=register">Đăng Ký Ngay</a></p>
+            <p>Bạn là admin ? <a href="http://da1-hau.test/admin/login.php" class="text-danger">Run as administrator </a></p>
             <a href="" class="text-danger">Quên Mật Khẩu ?</a>
+            
         </form>
     </div>
 </main>

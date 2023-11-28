@@ -51,7 +51,8 @@ if (isset($_SESSION["admin"]) && is_array($_SESSION["admin"]) && (count($_SESSIO
                 <p>Xin chào
                     <?php echo $username; ?>
                 </p>
-                <a href="logout.php">Đăng Xuất</a>
+                <a href="login.php">Đăng Xuất</a>
             </div>
         </div>
+        <a class="nav-link" href="../index.php">Quay về trang người dùng</a>
     </header>
