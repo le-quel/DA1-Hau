@@ -10,7 +10,7 @@
                 <label for="id_category">Tên Danh Mục</label>
 
                 <select class="form-control" name="id_category" id="id_category">
-                    <option value="0"><?= $list_category[0]['name'] ?></option>
+
                     <?php
                     if (isset($list_category)) {
                         foreach ($list_category  as $dm) {
@@ -27,16 +27,16 @@
             </div>
 
             <div class="form-group mb-3">
-                <label for="image">Hình Ảnh</label>
+                <label for="img">Hình Ảnh</label>
                 <input type="file" name="image" id="image" class="form-control d-block" value="<?= $one[0]['image'] ?>">
+                <img src="<?= $one[0]['image'] ?>" width="100px" alt="">
             </div>
 
             <div class="form-group mb-3">
-                <label for="gallery">Hình Ảnh Chi Tiết</label>
-                <?php foreach (json_decode($one[0]['gallery']) as $key => $gallery) { ?>
-                <input type="file" name="<?php echo ($key) ?>" value="<?php echo $gallery  ?>" id="<?php echo $key ?>"
-                    class="form-control d-block">
-                <?php } ?>
+                <label for="gallery">Bộ sưu tập</label>
+                <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
+                    value="<?= $one[0]['gallery'] ?>">
+                <img src="<?= $one[0]['gallery'] ?>" width="100px" alt="">
             </div>
 
 

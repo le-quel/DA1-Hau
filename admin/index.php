@@ -48,7 +48,7 @@ if (isset($_GET["page"])) {
 
               
                 // Xử lý tải lên ảnh chính
-                $image_path = "";
+                $image_path; // Giữ nguyên URL ảnh cũ mặc định
                 if ($_FILES["image"]["error"] == UPLOAD_ERR_OK) {
                     $target_dir = "../Uploads/";
                     $target_file = $target_dir . basename($_FILES["image"]["name"]);
@@ -57,11 +57,14 @@ if (isset($_GET["page"])) {
                     } else {
                         $message = "Lỗi khi tải lên ảnh.";
                     }
+                } else {
+                    // Người dùng không tải lên ảnh mới, giữ nguyên URL của ảnh cũ
+                    $image_path = $one[0]['image']; // Sử dụng URL ảnh cũ, điều này cần phải được thay đổi tùy vào cấu trúc dữ liệu của bạn.
                 }
         
                 $gallery_images = [];
                 // $target_dir_gallery = "../Uploads";
-                $target_dir = "../Uploads/";
+                $target_dir = "../uploads/";
                 if (isset($_FILES["gallery"])) {
                     foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
                         $gallery_image_name = $_FILES["gallery"]["name"][$key];
@@ -81,7 +84,7 @@ if (isset($_GET["page"])) {
                 if (empty($message)) {
                     $galleryData = ["images" => $gallery_images];
                     $jsonGallery = json_encode($gallery_images);
-        
+                    
                    // Insert product data
                 try {
                     $sql = "INSERT INTO product(name, image, gallery, price, sale, info,view, hot, quantity, id_category, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,NOW())";
@@ -98,40 +101,86 @@ if (isset($_GET["page"])) {
             $list_category = category_select_all();
             require_once "products/add-product.php";
             break;
-        case 'update-product':
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $one = getone_product($id);
-                // echo $id;
-                // print_r($one);
-            }
-            if ((isset($_POST['capnhat'])) && ($_POST['capnhat'])) {
-
-
-                $id_category = $_POST['id_category'];
-                $name = $_POST['name'];
-
-                $info = $_POST['info'];
-                $price = $_POST['price'];
-                $sale = $_POST['sale'];
-                $view = $_POST['view'];
-                $hot = $_POST['hot'];
-                $quantity = $_POST['quantity'];
+           case 'update-product':
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $one = getone_product($id);
                
+                }
+                
+                if ((isset($_POST['capnhat'])) && ($_POST['capnhat'])) {
+           
+            $id_category = $_POST['id_category'];
+            $name = $_POST['name'];
+
+            $info = $_POST['info'];
+            $price = $_POST['price'];
+            $sale = $_POST['sale'];
+            $view = $_POST['view'];
+            $hot = $_POST['hot'];
+            $quantity = $_POST['quantity'];
+
+          
+            // Xử lý tải lên ảnh chính
+            $image_path = "";
+            if ($_FILES["image"]["error"] == UPLOAD_ERR_OK) {
                 $target_dir = "../Uploads/";
-
-                $target_file = $target_dir . basename($_FILES['image']['name']);
-
-                $image = $target_file;
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
-                update_product($id, $name, $image, $gallery, $price, $sale, $info, $view, $hot, $quantity, $id_category);
-                header("Location: index.php?page=product");
+                $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                    $image_path = $target_file;
+                } else {
+                    $message = "Lỗi khi tải lên ảnh.";
+                }
             }
-            $list_category = category_select_all();
-            require_once "products/update-product.php";
-            break;
+    
+            $gallery_images = [];
+            // $target_dir_gallery = "../Uploads";
+            $target_dir = "../uploads/";
+            if (isset($_FILES["gallery"])) {
+                foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
+                    $gallery_image_name = $_FILES["gallery"]["name"][$key];
+                    $gallery_target_file = $target_dir . basename($gallery_image_name);
+                    // Chỉ xử lý ảnh nếu người dùng đã tải lên
+                    if ($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
+                        if (move_uploaded_file($tmp_name, $gallery_target_file)) {
+                            $gallery_images[] = $gallery_target_file;
+                        } else {
+                            $message = "Lỗi khi tải lên ảnh trong gallery.";
+                            break;
+                        }
+                    }
+                }
+            }
+    
+            if (empty($message)) {
+                $galleryData = ["images" => $gallery_images];
+                $jsonGallery = json_encode($gallery_images);
+                if ($image_path!="" &&  $jsonGallery!=""){
+                    try {
+                        $sql = "UPDATE product SET name=?, image=?, gallery=?, price=?, sale=?, info=?, view=?, hot=?, quantity=?, id_category=?, created_at=NOW(), update_at=NOW() WHERE id=?";
+                        pdo_execute($sql, $name, $image_path, $jsonGallery,  $price, $sale, $info, $view, $hot, $quantity, $id_category, $id);
+                        echo "Chỉnh sửa thành công";
+                    } catch (PDOException $e) {
+                        echo "Chỉnh Sửa thất bại! " . $e->getMessage();
+                    }
+                }else {
+                    try {
+                        $sql = "UPDATE product SET name=?, price=?, sale=?, info=?, view=?, hot=?, quantity=?, id_category=?, created_at=NOW(), update_at=NOW() WHERE id=?";
+                        pdo_execute($sql, $name,  $price, $sale, $info, $view, $hot, $quantity, $id_category, $id);
+                        echo "Chỉnh sửa thành công";
+                    } catch (PDOException $e) {
+                        echo "Chỉnh Sửa thất bại! " . $e->getMessage();
+                    }
+                }
+               // Insert product data
+              
+                            }
+                        }
+
+        $list_category = category_select_all();
+        require_once "products/update-product.php";
+        break;
+
         case 'del-product':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];

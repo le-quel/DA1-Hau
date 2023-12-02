@@ -44,3 +44,47 @@
         </form>
     </div>
 </main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        var errors = [];
+
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var fullname = document.getElementById('fullname').value;
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+        var address = document.getElementById('address').value;
+
+        // Check if fields are empty
+        if (username === '' || password === '' || fullname === '' || email === '' || phone === '' ||
+            address === '') {
+            errors.push('Vui lòng điền đầy đủ thông tin.');
+        }
+
+        // Check password length
+        if (password.length < 6) {
+            errors.push('Mật khẩu phải có ít nhất 6 ký tự.');
+        }
+
+        // Check email format
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errors.push('Địa chỉ email không hợp lệ.');
+        }
+
+        // Check phone number format (10 digits)
+        var phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(phone)) {
+            errors.push('Số điện thoại phải có 10 chữ số.');
+        }
+
+        // Display errors or submit the form
+        if (errors.length > 0) {
+            event.preventDefault(); // Prevent form submission
+            alert(errors.join('\n')); // Display all errors
+        }
+    });
+});
+</script>

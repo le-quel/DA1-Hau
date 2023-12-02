@@ -72,3 +72,44 @@
         </form>
     </div>
 </main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('form');
+    var submitted = false;
+
+    form.addEventListener('submit', function(event) {
+        if (!submitted) {
+            var errors = [];
+
+            var idCategory = document.getElementById('id_category').value;
+            var name = document.getElementById('name').value;
+            var image = document.getElementById('image').value;
+            var price = document.getElementById('price').value;
+            var sale = document.getElementById('sale').value;
+
+            // Check if fields are empty
+            if (idCategory === '0' || name === '' || image === '' || price === '' || sale === '') {
+                errors.push('Vui lòng điền đầy đủ thông tin.');
+            }
+
+            // Check if price is a number and has at most 9 digits
+            if (isNaN(price) || price.length > 9) {
+                errors.push('Giá chỉ được nhập số và dưới 9 ký tự.');
+            }
+
+            // Check if sale is a number and has at most 3 digits
+            if (isNaN(sale) || sale.length > 3) {
+                errors.push('Sale chỉ được nhập số và dưới 3 ký tự.');
+            }
+
+            // Display errors or submit the form
+            if (errors.length > 0) {
+                event.preventDefault(); // Prevent form submission
+                alert(errors.join('\n')); // Display all errors
+            } else {
+                submitted = true; // Prevent multiple submissions
+            }
+        }
+    });
+});
+</script>
