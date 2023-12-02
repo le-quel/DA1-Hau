@@ -1,6 +1,6 @@
 <main class="my-5">
     <div class="container">
-        <a href="index.php?page=category">Quay Lại</a>
+        <a href="index.php?page=category" class="btn btn-primary">Quay Lại</a>
         <h3 class="text-center">Thêm Danh Mục Mới</h3>
         <form action="index.php?page=add-category" method="post" onsubmit="return check()">
             <div class="form-group mb-3">

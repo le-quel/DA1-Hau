@@ -1,5 +1,5 @@
-<a href="index.php?page=add-user">Thêm Người Dùng Mới</a>
 <h3 class="text-center">Danh Sách Người Dùng</h3>
+<a href="index.php?page=add-user" class="btn btn-primary">Thêm Người Dùng Mới</a>
 <table class="table table-striped">
     <thead>
         <th scope="col">STT</th>
@@ -30,8 +30,8 @@
             echo 'Admin';
         }
         ?></td>
-            <td><a href="index.php?page=update-user&id=<?php echo $user['id']?>">Sửa</a>|
-                <a href=" index.php?page=del-user&id=<?php echo $user['id']?>">Xóa</a>
+            <td><a href="index.php?page=update-user&id=<?php echo $user['id']?>"><i class="bx bx-edit"></i></a>|
+                <a href=" index.php?page=del-user&id=<?php echo $user['id']?>"><i class="bx bx-trash"></i></a>
             </td>
         </tr>
         <?php $i++; } ?>

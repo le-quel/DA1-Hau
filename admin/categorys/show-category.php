@@ -1,5 +1,5 @@
-<a href="index.php?page=add-category">Thêm Danh Mục Mới</a>
 <h3 class="text-center">Danh Sách Danh Mục</h3>
+<a href="index.php?page=add-category" class="btn btn-primary">Thêm Danh Mục Mới</a>
 <table class="table table-striped">
     <thead>
         <th scope="col">STT</th>
@@ -17,8 +17,8 @@
             <td><?php echo $category['home'] ?></td>
 
 
-            <td><a href="index.php?page=update-category&id=<?php echo $category['id']?>">Sửa</a>|
-                <a href=" index.php?page=del-category&id=<?php echo $category['id']?>">Xóa</a>
+            <td><a href="index.php?page=update-category&id=<?php echo $category['id']?>"><i class="bx bx-edit"></i></a>|
+                <a href=" index.php?page=del-category&id=<?php echo $category['id']?>"><i class="bx bx-trash"></i></a>
             </td>
         </tr>
         <?php $i++; } ?>

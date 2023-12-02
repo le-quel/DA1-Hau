@@ -5,7 +5,7 @@
 ?>
 <main class="my-5">
     <div class="container">
-        <a href="index.php?page=user">Quay Lại</a>
+        <a href="index.php?page=user" class="btn btn-primary">Quay Lại</a>
         <h3 class="text-center">Chỉnh Sửa Thông Tin Người Dùng</h3>
         <form action="index.php?page=update-user" method="post">
             <div class="form-group mb-3">

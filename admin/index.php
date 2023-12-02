@@ -97,6 +97,7 @@ if (isset($_GET["page"])) {
                     echo "Thêm thất bại: " . $e->getMessage();
                 }
                                 }
+                                header('Location: index.php?page=product');
                             }
             $list_category = category_select_all();
             require_once "products/add-product.php";
@@ -175,6 +176,7 @@ if (isset($_GET["page"])) {
                // Insert product data
               
                             }
+                            header('Location: index.php?page=product');
                         }
 
         $list_category = category_select_all();
@@ -198,6 +200,7 @@ if (isset($_GET["page"])) {
                 $name = $_POST['name'];
                 $home = $_POST['home'];
                 addcategory($name, $home);
+                header("Location: index.php?page=category");
             }
             require_once "categorys/add-category.php";
             break;
@@ -240,6 +243,7 @@ if (isset($_GET["page"])) {
                 $address = $_POST['address'];
                 $role = $_POST['role'];
                 addUser($id, $username, $password, $fullname, $email, $phone, $address, $role);
+                header('Location: index.php?page=user');
             }
             require_once "users/add-user.php";
             break;
@@ -274,11 +278,13 @@ if (isset($_GET["page"])) {
             require_once "users/show-user.php";
             break;
         default:
-            require_once "views/home.php";
+        $list_tksp = get_statistical();
+        require_once "views/statistical/statistical.php";
             break;
     }
 } else {
-    require_once "views/home.php";
+    $list_tksp = get_statistical();
+    require_once "views/statistical/statistical.php";
 }
 
 require_once "views/footer.php";
